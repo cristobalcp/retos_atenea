@@ -45,15 +45,15 @@ for filename in os.listdir(directory):
             if freq > 0:
                 ent = ent + freq * math.log(freq, 2)
         ent = -ent
-        
+
         results.append({'file': target, 'value': ent})
 
         print('Entropia:', str(ent))
         print('*********************************')
 
-final={'file': '', 'value': 8.0}
+final={'file': '', 'value': 0.0}
 for result in results:
-    if(result['value'] < final['value']):
+    if(result['value'] > final['value']):
         final = result
 
 print('Ganador: ', final)
