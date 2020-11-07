@@ -5,18 +5,21 @@ import math
 import unicodedata as ud
 
 if len(sys.argv) != 2:
-    print("Errror: entropia.py directorio")
+    print("Error: entropia.py [directorio]")
     sys.exit()
 
-# Lectura del fichero en un array de bytes
+
 directory=sys.argv[1]
 results=[]
 target = ''
+# Iteramos sobre los ficheros del directorio(srting) dado como parametro
+# y calculamos la entropia de Shannon de cada uno
 for filename in os.listdir(directory):
     if filename.endswith(".jpg"):
         target = (os.path.join(directory, filename))
         byteArray=[]
-
+        
+        # Lectura del fichero en un array de bytes
         with open(target, "rb") as f:
             while (byte := f.read(1)):
                 byteArray.append(byte)
@@ -42,6 +45,7 @@ for filename in os.listdir(directory):
             if freq > 0:
                 ent = ent + freq * math.log(freq, 2)
         ent = -ent
+        
         results.append({'file': target, 'value': ent})
 
         print('Entropia:', str(ent))
